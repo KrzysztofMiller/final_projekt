@@ -1,0 +1,6 @@
+RewriteEngine on
+RewriteBase /voip/
+
+# --- / --- #
+
+RewriteRule !^(img)($|/) index.php [L]
