@@ -3,4 +3,4 @@ RewriteBase /voip/
 
 # --- / --- #
 
-RewriteRule !^(img)($|/) index.php [L]
+RewriteRule !^(img)($|/) start.php [L]
