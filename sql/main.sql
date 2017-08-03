@@ -5,7 +5,7 @@ use voip;
 
 CREATE TABLE customer (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  customer VARCHAR(30) NOT NULL,
+  username VARCHAR(30) NOT NULL,
   password VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   created DATETIME NOT NULL,

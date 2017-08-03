@@ -5,7 +5,7 @@ class Customer
     const table = "customer";
 
     public $id;
-    public $customer;
+    public $username;
     public $password;
     public $email;
     public $created;
@@ -16,20 +16,20 @@ class Customer
     /**
      * Customer constructor.
      * @param $id
-     * @param $customer
+     * @param $username;
      * @param $password
      * @param $email
      * @param $created
      * @param $balance
      */
-    public function __construct($customer, $password, $email)
-    {
-        $this->setCustomer($customer);
-        $this->setPassword($password);
-        $this->setEmail($email);
-        $this->setCreated(date('Y-m-d H-i-s'));
-        $this->setBalance(0);
-    }
+//    public function __construct($username, $password, $email)
+//    {
+//        $this->setUsername($username);
+//        $this->setPassword($password);
+//        $this->setEmail($email);
+//        $this->setCreated(date('Y-m-d H-i-s'));
+//        $this->setBalance(0);
+//    }
 
 
     /**
@@ -51,17 +51,17 @@ class Customer
     /**
      * @return mixed
      */
-    public function getCustomer()
+    public function getUsername()
     {
-        return $this->customer;
+        return $this->username;
     }
 
     /**
-     * @param mixed $customer
+     * @param mixed $username
      */
-    public function setCustomer($customer)
+    public function setUsername($username)
     {
-        $this->customer = $customer;
+        $this->username = $username;
     }
 
     /**
