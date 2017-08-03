@@ -1,18 +1,33 @@
 <?php
 
+$baseUri="/voip/";
+
 $uri = $_SERVER['REQUEST_URI'];
 
-echo($uri);
-echo("<br>");
+if ($uri == $baseUri){
 
-if ($uri == "/voip/"){
-    echo ("strona główna");
+    include ("template/index.html");
+
+
 }
 
-if ($uri == "/voip/newcustomer/"){
-    echo ("newcustomer");
+if ($uri == $baseUri."newcustomer"){
+
+    if($_SERVER["REQUEST_METHOD"] === "GET"){
+        include ("template/newcustomer.html");
+    } elseif($_SERVER["REQUEST_METHOD"] === "POST") {
+        //sprawdzamy poprawnosc danych
+
+        //sprawdzamy czy login juz istnieje
+
+        //sprawdzamy
+        echo "dodajemy klienta";
+    }
+
+
+
 }
 
-if ($uri == "/voip/login/"){
-    echo ("login");
+if ($uri == $baseUri."login"){
+    include ("template/login.html");
 }
