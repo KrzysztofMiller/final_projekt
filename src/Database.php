@@ -42,31 +42,31 @@ class Database
         ));
     }
 
+    public static function selectByParameter($nameOfClass,$NameOfParameter,$parameter)
+    {
+        $sql = "SELECT * FROM ".$nameOfClass::table." WHERE ".
+            $NameOfParameter." = :".$NameOfParameter;
+        $stmt = Database::$conn->prepare($sql);
+        $stmt->execute([$NameOfParameter => $parameter]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 
-//    public static function renderQuery($object)
-//    {
-//        $array = self::getArray($object);
-//        $start = "INSERT INTO ".$object::table." (";
-//        $keys = implode(",",array_keys($array));
-//        $end = ") VALUES (".str_repeat("?,",count($array)-1)."?)";
-//        return $start.$keys.$end;
-//    }
-//
-//    public static function save($object)
-//    {
-//        $sql = self::renderQuery($object);
-//        $stmt = self::$conn->prepare($sql);
-//        return $stmt->execute(array_values(
-//            self::getArray($object)
-//        ));
-//    }
-//
+
+//$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    public static function selectAll($nameOfClass,$type = PDO::FETCH_ASSOC)
+    {
+        $sth = self::$conn->query("SELECT * FROM ".$nameOfClass::table);
+        return $sth->fetchAll($type);
+    }
+
 //    public static function selectAll($nameOfClass,$type = PDO::FETCH_ASSOC)
 //    {
 //        $sth = self::$conn->query("SELECT * FROM ".$nameOfClass::table);
 //        return $sth->fetchAll($type);
 //    }
+//
 //
 //    public static function delete($name,$id)
 //    {

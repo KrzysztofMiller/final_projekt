@@ -62,10 +62,7 @@ if ($uri == $baseUri."newcustomer"){
 
         Database::connect();
 
-        $sql = "SELECT * FROM customer WHERE email = :email";
-        $stmt = Database::$conn->prepare($sql);
-        $stmt->execute(['email' => $_POST['email']]);
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = Database::selectByParameter("Customer","customer",$_POST['customer']);
 
         if (count($result)) {
             $errors .= "Niestety wybrany login już istnieje. Wybierz inny.<br>";
@@ -77,8 +74,6 @@ if ($uri == $baseUri."newcustomer"){
             include ("template/newcustomer.html");
 
             die;
-        } else {
-            echo"wolny";
         }
 
         $customer = new Customer($_POST['customer'],$_POST['password'],$_POST['email']);
@@ -87,14 +82,9 @@ if ($uri == $baseUri."newcustomer"){
 
         Database::save($customer);
 
-
-
-
-
-
-
-
         //automatycznie logujemy klienta do panelu
+
+        
 
 
 
