@@ -8,9 +8,9 @@ CREATE TABLE customer (
   customer VARCHAR(30) NOT NULL,
   password VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
-  created DATE NOT NULL,
+  created DATETIME NOT NULL,
   balance DECIMAL(16,2) NOT NULL,
-  lastsynchro DATE,
+  lastsynchro DATETIME,
   payer_id int
 );
 

@@ -1,5 +1,8 @@
 <?php
 
+require_once ('./src/Database.php');
+require_once ('./src/Model/Customer.php');
+
 $baseUri="/voip/";
 
 $uri = $_SERVER['REQUEST_URI'];
@@ -7,8 +10,6 @@ $uri = $_SERVER['REQUEST_URI'];
 if ($uri == $baseUri){
 
     include ("template/index.html");
-
-
 }
 
 if ($uri == $baseUri."newcustomer"){
@@ -57,15 +58,41 @@ if ($uri == $baseUri."newcustomer"){
             die;
         }
 
-
-
         //sprawdzamy czy login juz istnieje
 
+        Database::connect();
 
+        $sql = "SELECT * FROM customer WHERE email = :email";
+        $stmt = Database::$conn->prepare($sql);
+        $stmt->execute(['email' => $_POST['email']]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        if (count($result)) {
+            $errors .= "Niestety wybrany login już istnieje. Wybierz inny.<br>";
+        }
 
+        if ($errors!=""){
+            echo($errors);
+
+            include ("template/newcustomer.html");
+
+            die;
+        } else {
+            echo"wolny";
+        }
+
+        $customer = new Customer($_POST['customer'],$_POST['password'],$_POST['email']);
 
         //dodajemy klienta do bazy
+
+        Database::save($customer);
+
+
+
+
+
+
+
 
         //automatycznie logujemy klienta do panelu
 

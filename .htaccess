@@ -1,6 +1,6 @@
-#RewriteEngine on
-#RewriteBase /voip/
-#
-## --- / --- #
-#
-#RewriteRule !^(img)($|/) start.php [L]
+RewriteEngine on
+RewriteBase /voip/
+
+# --- / --- #
+
+RewriteRule !^(img)($|/) start.php [L]
