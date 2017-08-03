@@ -1,11 +1,12 @@
 <html>
 <body>
+{{errors}}
 <h1>Załóż konto</h1>
 <form action="./newcustomer" method="post">
-    Wprowadź login: <input type="text" name="username" placeholder="login"><br>
-    Wprowadź hasło: <input type="password" name="password" placeholder="hasło"><br>
-    Potwierdź hasło: <input type="password" name="password2" placeholder="hasło"><br>
-    Wprowadź email: <input type="text" name="email" placeholder="email"><br>
+    Wprowadź login: <input type="text" name="username" value="{{username}}"><br>
+    Wprowadź hasło: <input type="password" name="password" value="{{password}}"><br>
+    Potwierdź hasło: <input type="password" name="password2" value="{{password2}}"><br>
+    Wprowadź email: <input type="text" name="email" value="{{email}}"><br>
     <input type="submit" value="Załóż konto"><br>
     <p>Jeśli już posiadasz konto, <a href="./login">zaloguj się</a></p>
 </form>

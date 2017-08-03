@@ -7,14 +7,36 @@ require_once 'Model/Customer.php';
 
 class Controller
 {
+    public function render($file,$array)
+    {
+        $html = file_get_contents(__DIR__."/../template/".$file.".html");
+        foreach ($array as $key => $value) {
+            $html = str_replace('{{'.$key.'}}',$value,$html);
+        }
+        return $html;
+    }
 
     public function addCustomer()
     {
+        $errors = Validator::validateFormAddCustomer();
+        if ($errors){
+            $renderParams = Form::getPost();
+            $renderParams['errors']=$errors;
+            echo($this->render("newcustomer",$renderParams));
+            die;
+        }
+
+        $errors = Validator::usernameExists($_POST['username']);
+        if ($errors){
+            $renderParams = Form::getPost();
+            $renderParams['errors']=$errors;
+            echo($this->render("newcustomer",$renderParams));
+            die;
+        }
+
         $customer = Form::populate(new Customer());
-        var_dump($customer);
         $customer->setCreated(date('Y-m-d H-i-s'));
         $customer->setBalance(0);
-        var_dump($customer);
         Database::connect();
         Database::save($customer);
 
@@ -66,14 +88,7 @@ class Controller
 //        Database::delete(Group::class, $id);
 //        return $this->showGroup();
 //    }
-//    private function render($file,$array)
-//    {
-//        $html = file_get_contents("./../template/".$file.".html");
-//        foreach ($array as $key => $value) {
-//            $html = str_replace('{{'.$key.'}}',$value,$html);
-//        }
-//        return $html;
-//    }
+
 
     //    public function showGroup()
 //    {

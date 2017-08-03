@@ -60,6 +60,19 @@ class Validator
         }
     }
 
+    public static function validateFormAddCustomer(){
+        // sprawdzamy poprawnosc danych
+
+        $errors="";
+        $errors.= self::checkValidUsername($_POST['username']);
+        $errors.= self::checkValidPassword($_POST['password']);
+        $errors.= self::checkPasswords($_POST['password'],$_POST['password2']);
+        $errors.= self::checkValidEmail($_POST['email']);
+
+        return($errors);
+
+    }
+
 
 
 }

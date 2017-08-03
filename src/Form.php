@@ -16,5 +16,18 @@ class Form
        return $object;
    }
 
+    public static function getPost()
+    {
+        $keys = array_keys($_POST);
+
+        $array=[];
+
+        foreach ($keys as $key) {
+            $array[$key] = $_POST[$key];
+        }
+
+        return $array;
+    }
+
 
 }
