@@ -1,9 +1,10 @@
 <html>
 <body>
+{{errors}}
 <h1>Zaloguj się do panelu</h1>
 <form action="./login" method="post">
-    Wprowadź login: <input type="text" name="customer" placeholder="login"><br>
-    Wprowadź hasło: <input type="password" name="password" placeholder="hasło"><br>
+    Wprowadź login: <input type="text" name="username" value="{{username}}"><br>
+    Wprowadź hasło: <input type="password" name="password" value="{{password}}"><br>
     <input type="submit" value="Zaloguj się"><br>
     <p>Jeśli jeszcze nie masz konta, <a href="./newcustomer">zarejestruj się</a></p>
 </form>

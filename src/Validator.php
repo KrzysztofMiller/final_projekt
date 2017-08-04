@@ -61,7 +61,6 @@ class Validator
     }
 
     public static function validateFormAddCustomer(){
-        // sprawdzamy poprawnosc danych
 
         $errors="";
         $errors.= self::checkValidUsername($_POST['username']);
@@ -70,7 +69,32 @@ class Validator
         $errors.= self::checkValidEmail($_POST['email']);
 
         return($errors);
+    }
 
+    public static function validateFormLoginToPanel(){
+
+        $errors="";
+        $errors.= self::checkValidUsername($_POST['username']);
+        $errors.= self::checkValidPassword($_POST['password']);
+
+        return($errors);
+    }
+
+    public static function passwordCorrect($username,$password)
+    {
+        Database::connect();
+        $result = Database::selectByParameter("Customer","username",$username);
+
+        if (count($result)) {
+            if ($result[0]['password']==$password){
+                return ["",$result[0]];
+            } else {
+                return ["Niestety nieprawidłowe hasło.<br>",0];
+            }
+
+        } else {
+            return ["Niestety nie ma w bazie takiego loginu<br>",0];
+        }
     }
 
 

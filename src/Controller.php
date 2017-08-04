@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once 'Database.php';
 require_once 'Form.php';
 require_once 'Validator.php';
@@ -40,7 +42,69 @@ class Controller
         Database::connect();
         Database::save($customer);
 
-//        return $this->showProduct();
+        return "";
+    }
+
+    public function customerArea(){
+        $renderParams['id']=$_SESSION['customerId'];
+        return($this->render("customerarea",$renderParams));
+    }
+
+    public function buyCredit(){
+        $renderParams['id']=$_SESSION['customerId'];
+        return($this->render("buycredit",$renderParams));
+    }
+
+    public function orderList(){
+        $renderParams['id']=$_SESSION['customerId'];
+        return($this->render("orderlist",$renderParams));
+    }
+
+    public function editPayer(){
+        $renderParams['id']=$_SESSION['customerId'];
+        return($this->render("editpayer",$renderParams));
+    }
+
+    public function checkBalance(){
+        $renderParams['id']=$_SESSION['customerId'];
+        return($this->render("checkbalance",$renderParams));
+    }
+
+    public function editUserData(){
+        $renderParams['id']=$_SESSION['customerId'];
+        return($this->render("edituserdata",$renderParams));
+    }
+
+    public function loginToPanel()
+    {
+        $errors = Validator::validateFormLoginToPanel();
+        if ($errors){
+           $renderParams = Form::getPost();
+           $renderParams['errors']=$errors;
+           return($this->render("login",$renderParams));
+           die;
+        }
+
+        $result = Validator::passwordCorrect($_POST['username'],$_POST['password']);
+        $errors = $result[0];
+        if ($errors){
+            $renderParams = Form::getPost();
+            $renderParams['errors']=$errors;
+            return($this->render("login",$renderParams));
+            die;
+        }
+
+        if ($result[1]) {
+            $_SESSION['customerId'] = $result[1]['id'];
+            return $this->customerArea();
+        }
+
+    }
+
+    public function logout(){
+        unset($_SESSION['customerId']);
+        $startForm=array('errors'=>'','username'=>'','password'=>'');
+        echo($this->render("login",$startForm));
     }
 
 
